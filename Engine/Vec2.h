@@ -6,12 +6,13 @@ template <typename T>
 class Vec2 {
 
 public:
+	Vec2() = default;
 	explicit Vec2(T x, T y) :
 		x(x),
 		y(y)
 	{};
 
-	Vec2<T> operator+(const Vec2<T>& rhs) {
+	Vec2<T> operator+(const Vec2<T>& rhs) const {
 		return Vec2<T>{x + rhs.x, y + rhs.y};
 	}
 
@@ -19,7 +20,7 @@ public:
 		return *this = *this + rhs;;
 	}
 	
-	Vec2<T> operator*(const T& rhs) {
+	Vec2<T> operator*(const T& rhs) const {
 		return Vec2<T>{x * rhs, y * rhs};
 	}
 
@@ -27,7 +28,7 @@ public:
 		return *this = *this * rhs;
 	}
 
-	Vec2<T> operator-(const Vec2<T>& rhs) {
+	Vec2<T> operator-(const Vec2<T>& rhs) const {
 		return Vec2<T>{x - rhs.x, y - rhs.y};
 	}
 
@@ -35,7 +36,7 @@ public:
 		return *this = *this - rhs;;
 	}
 
-	Vec2<T> operator/(const T& rhs) {
+	Vec2<T> operator/(const T& rhs) const {
 		return Vec2<T>{x / rhs, y / rhs};
 	}
 

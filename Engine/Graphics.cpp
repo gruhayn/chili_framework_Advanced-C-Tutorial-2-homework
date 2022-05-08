@@ -240,6 +240,56 @@ Graphics::Graphics( HWNDKey& key )
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
 }
 
+void Graphics::DrawLine(Vec2<int> p1, Vec2<int> p2, Color c)
+{
+	int xDif = abs(p1.x - p2.x);
+	int yDif = abs(p1.y - p2.y);
+
+	//y=kx+b
+	float k=0;
+	if (((float)p2.x - (float)p1.x) != 0) {
+		k = ((float)p2.y - (float)p1.y) / ((float)p2.x - (float)p1.x);
+
+		float b = p2.y - p2.x * k;
+
+
+
+		if (xDif > yDif) {
+			int startX = p1.x > p2.x ? p2.x : p1.x;
+			int endX = p1.x <= p2.x ? p2.x : p1.x;
+
+			for (int i = startX; i <= endX; i++)
+			{
+				PutPixel(i, (int)(k * i + b), c);
+			}
+		}
+		else {
+
+			int startY = p1.y > p2.y ? p2.y : p1.y;
+			int endY = p1.y <= p2.y ? p2.y : p1.y;
+
+			for (int i = startY; i <= endY; i++)
+			{
+				PutPixel((int)((i - b) / k), i, c);
+			}
+		}
+	}
+	else {
+		int startY = p1.y > p2.y ? p2.y : p1.y;
+		int endY = p1.y <= p2.y ? p2.y : p1.y;
+
+		if (p1.y > p2.y) {
+			std::swap(p1, p2);
+		}
+
+		for (int i = p1.y; i <= p2.y; i++)
+		{
+			PutPixel(p1.x, i, c);
+		}
+	}
+
+}
+
 Graphics::~Graphics()
 {
 	// free sysbuffer memory (aligned free)
@@ -315,6 +365,7 @@ void Graphics::PutPixel( int x,int y,Color c )
 	assert( y < int( Graphics::ScreenHeight ) );
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
+
 
 
 //////////////////////////////////////////////////
