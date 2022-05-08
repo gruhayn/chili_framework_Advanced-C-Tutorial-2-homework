@@ -3,10 +3,10 @@
 #include "Vec2.h"
 #include "Colors.h"
 
-class Vertex
+class Edge
 {
 public:
-	Vertex() = default;
+	Edge() = default;
 
 public:
 	Vec2<int> point1 = Vec2<int>{};

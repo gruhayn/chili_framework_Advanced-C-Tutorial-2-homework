@@ -21,11 +21,15 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+#include "Edge.h" 
+#include "GeometricObject.h"
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd )
 {
+	
 }
 
 void Game::Go()
@@ -38,6 +42,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+
+	
 }
 
 void Game::ComposeFrame()

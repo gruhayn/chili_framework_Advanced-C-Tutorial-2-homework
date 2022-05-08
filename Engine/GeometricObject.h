@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vertex.h"
+#include "Edge.h"
 #include <vector>
 
 #include "CoordinateSystemSwitcher.h"
@@ -11,7 +11,7 @@ class GeometricObject
 public:
 	GeometricObject() = default;
 
-	GeometricObject(std::vector<Vertex> vertices)
+	GeometricObject(std::vector<Edge> vertices)
 		:
 		vertices(vertices)
 	{};
@@ -24,6 +24,6 @@ public:
 	}
 
 private:
-	std::vector<Vertex> vertices;
+	std::vector<Edge> vertices;
 	CoordinateSystemSwitcher css = CoordinateSystemSwitcher {};
 };

@@ -24,6 +24,8 @@
 #include "Mouse.h"
 #include "Graphics.h"
 
+#include "GeometricObject.h"
+
 class Game
 {
 public:
@@ -42,5 +44,6 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	GeometricObject go;
 	/********************************/
 };
