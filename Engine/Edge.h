@@ -10,6 +10,6 @@ public:
 
 public:
 	Vec2<int> point1 = Vec2<int>{};
-	Vec2<int> point2 = Vec2<int>{};;
+	Vec2<int> point2 = Vec2<int>{};
 	Color color;
 };

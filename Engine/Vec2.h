@@ -17,7 +17,7 @@ public:
 	}
 
 	Vec2<T>& operator+=(const Vec2<T>& rhs) {
-		return *this = *this + rhs;;
+		return *this = *this + rhs;
 	}
 	
 	Vec2<T> operator*(const T& rhs) const {
@@ -33,7 +33,7 @@ public:
 	}
 
 	Vec2<T>& operator-=(const Vec2<T>& rhs) {
-		return *this = *this - rhs;;
+		return *this = *this - rhs;
 	}
 
 	Vec2<T> operator/(const T& rhs) const {
