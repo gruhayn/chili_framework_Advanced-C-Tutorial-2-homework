@@ -11,19 +11,25 @@ class GeometricObject
 public:
 	GeometricObject() = default;
 
-	GeometricObject(std::vector<Edge> vertices)
+	GeometricObject(std::vector<Edge> edges)
 		:
-		vertices(vertices)
+		edges(edges)
 	{};
 
-	void Draw(Graphics& gfx) {
-		for (size_t i = 0; i < vertices.size(); i++)
+	void Draw(Graphics& gfx) const {
+		for (size_t i = 0; i < edges.size(); i++)
 		{
-			gfx.DrawLine(css.ToGraphicsCoordinate<int>(vertices[i].point1), css.ToGraphicsCoordinate<int>(vertices[i].point2), vertices[i].color);
+			gfx.DrawLine(css.ToGraphicsCoordinate<int>(edges[i].point1), css.ToGraphicsCoordinate<int>(edges[i].point2), edges[i].color);
 		}
 	}
 
+
+protected:
+	void SetEdges(std::vector<Edge> in_edges) {
+		edges = in_edges;
+	}
+
 private:
-	std::vector<Edge> vertices;
-	CoordinateSystemSwitcher css = CoordinateSystemSwitcher {};
+	std::vector<Edge> edges;
+	mutable CoordinateSystemSwitcher css = CoordinateSystemSwitcher{};
 };
