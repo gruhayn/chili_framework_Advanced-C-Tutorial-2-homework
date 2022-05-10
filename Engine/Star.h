@@ -28,14 +28,14 @@ public:
 			const float rad = (i % 2 == 0) ? outerRadius : innerRadius;
 			points.emplace_back(
 				Vec2<float>{
-					rad * cos((float)i * dTheta),
-					rad * sin((float)i * dTheta)
+					rad * cos((float)i * dTheta + rotationAngle_Radian),
+					rad * sin((float)i * dTheta + rotationAngle_Radian)
 				}
 			);
 		}
 
 		std::vector<Edge> edges = {};
-		for (int i = 0; i < points.size() - 1; ++i) {
+		for (int i = 0; i < 2 * flareCount - 1; ++i) {
 			edges.emplace_back(Vec2<int>{(int)points[i].x, (int)points[i].y}, Vec2<int>{(int)points[i+1].x, (int)points[i+1].y}, c);
 		}
 
