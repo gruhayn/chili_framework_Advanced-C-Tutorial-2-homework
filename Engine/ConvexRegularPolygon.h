@@ -1,8 +1,5 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-
 #include "GeometricObject.h"
 
 
@@ -24,7 +21,7 @@ public:
 		}
 		
 		std::vector<Edge> edges = {};
-		float angle = 2 * M_PI / sideCount;
+		float angle = 2.0f * 3.14159f / sideCount;
 
 		for (int i = 0; i < sideCount; ++i)
 		{
@@ -37,16 +34,10 @@ public:
 			firstPoint = secondPoint;
 		}
 
-		std::for_each(edges.begin(), edges.end(), 
-			[&center](Edge& edge) 
-			{ 
-				edge.point1 += center; 
-				edge.point2 += center;
-			}
-		);
-
 		SetEdges(edges);
 
+		TranslatePointsOfEdges(center);
+		
 	};
 
 private:
