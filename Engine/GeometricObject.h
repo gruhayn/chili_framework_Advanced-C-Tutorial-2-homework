@@ -23,10 +23,24 @@ public:
 		}
 	}
 
+	std::vector<Edge> GetEdges() {
+		return edges;
+	}
 
 protected:
+	
 	void SetEdges(std::vector<Edge> in_edges) {
 		edges = in_edges;
+	}
+
+	void TranslatePointsOfEdges(Vec2<int> pos) {
+		std::for_each(edges.begin(), edges.end(),
+			[&pos](Edge& edge)
+			{
+				edge.point1 += pos;
+				edge.point2 += pos;
+			}
+		);
 	}
 
 private:
