@@ -10,7 +10,6 @@ public:
 	//todo add color list for colors of edges
 	ConvexRegularPolygon(Vec2<int> center, int sideCount, float radius, Color c=Colors::Blue, float rotationAngle_Radian = 0)
 		:
-		center(center),
 		sideCount(sideCount),
 		radius(radius)
 	{
@@ -36,13 +35,11 @@ public:
 		edges.emplace_back(Vec2<int>{(int)points.front().x, (int)points.front().y}, Vec2<int>{(int)points.back().x, (int)points.back().y}, c);
 
 		SetEdges(edges);
-
-		TranslatePointsOfEdges(center);
-		
+		this->center = center;
+		this->c = c;
 	};
 
 private:
-	Vec2<int> center;
 	int sideCount; 
 	float radius;
 };

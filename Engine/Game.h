@@ -24,7 +24,9 @@
 #include "Mouse.h"
 #include "Graphics.h"
 
-#include "GeometricObject.h"
+#include "ConvexRegularPolygon.h"
+#include "Drawable.h"
+#include "Camera.h"
 
 class Game
 {
@@ -44,6 +46,8 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
-	GeometricObject go;
+	std::vector<GeometricObject> objects;
+	Camera cam;
+	CoordinateSystemSwitcher css;
 	/********************************/
 };

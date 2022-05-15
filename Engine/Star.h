@@ -14,7 +14,6 @@ public:
 	//todo add color list for colors of edges
 	Star(Vec2<int> center, int flareCount, float innerRadius, float outerRadius, Color c = Colors::Blue, float rotationAngle_Radian = 0)
 		:
-		center(center),
 		flareCount(flareCount),
 		innerRadius(innerRadius),
 		outerRadius(outerRadius)
@@ -42,14 +41,11 @@ public:
 		edges.emplace_back(Vec2<int>{(int)points.front().x, (int)points.front().y}, Vec2<int>{(int)points.back().x, (int)points.back().y}, c);
 
 		SetEdges(edges);
-
-		TranslatePointsOfEdges(center);
-
-
+		this->center = center;
+		this->c = c;
 	}
 
 private:
-	Vec2<int> center;
 	int flareCount;
 	float innerRadius;
 	float outerRadius;

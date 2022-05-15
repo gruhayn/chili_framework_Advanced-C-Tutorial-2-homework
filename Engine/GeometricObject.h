@@ -13,18 +13,21 @@ public:
 
 	GeometricObject(std::vector<Edge> edges)
 		:
-		edges(edges)
+		edges(edges),
+		center(Vec2<int>{0, 0})
 	{};
-
-	void Draw(Graphics& gfx) const {
-		for (size_t i = 0; i < edges.size(); i++)
-		{
-			gfx.DrawLine(css.ToGraphicsCoordinate<int>(edges[i].point1), css.ToGraphicsCoordinate<int>(edges[i].point2), edges[i].color);
-		}
-	}
 
 	std::vector<Edge> GetEdges() {
 		return edges;
+	}
+
+	Vec2<int> GetCenter()
+	{
+		return center;
+	}
+
+	Drawable GetDrawable() {
+		return Drawable(edges, center);
 	}
 
 protected:
@@ -33,17 +36,11 @@ protected:
 		edges = in_edges;
 	}
 
-	void TranslatePointsOfEdges(Vec2<int> pos) {
-		std::for_each(edges.begin(), edges.end(),
-			[&pos](Edge& edge)
-			{
-				edge.point1 += pos;
-				edge.point2 += pos;
-			}
-		);
-	}
+
+protected:
+	Vec2<int> center;
+	Color c;
 
 private:
 	std::vector<Edge> edges;
-	mutable CoordinateSystemSwitcher css = CoordinateSystemSwitcher{};
 };

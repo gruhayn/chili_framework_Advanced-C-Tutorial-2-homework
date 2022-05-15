@@ -23,13 +23,24 @@
 
 #include "Edge.h" 
 #include "GeometricObject.h"
+#include "Star.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd),
+	css(gfx),
+	cam(css)
 {
-	
+	ConvexRegularPolygon go1 = ConvexRegularPolygon{ Vec2<int>{0,0},3, 100, Colors::Blue, 3.14159f / 4 };
+	ConvexRegularPolygon go2 = ConvexRegularPolygon{ Vec2<int>{200,100},6, 100, Colors::Yellow, 3.14159f / 4 };
+
+	Star s = Star{ Vec2<int>{0,100},5, 10, 100, Colors::Blue, 3.14159f/4 };
+
+	objects.push_back(go1);
+	objects.push_back(go2);
+	objects.push_back(s);
+
 }
 
 void Game::Go()
@@ -42,10 +53,34 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	int speed = 20;
+	if (wnd.kbd.KeyIsPressed(VK_UP)) {
+		cam.MoveUp(speed);
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+		cam.MoveUp(-speed);
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+		cam.MoveRight(-speed);
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+		cam.MoveRight(speed);
+	}
 
+	if (!wnd.mouse.IsEmpty()) {
+		if (wnd.mouse.LeftIsPressed()) {
+			cam.MultiplyZoom(1.05f);
+		}
+		else if (wnd.mouse.RightIsPressed()) {
+			cam.MultiplyZoom(0.95f);
+		}
+	}
 	
 }
 
 void Game::ComposeFrame()
 {
+	for (auto& o : objects) {
+		cam.Draw(o.GetDrawable());
+	}
 }
