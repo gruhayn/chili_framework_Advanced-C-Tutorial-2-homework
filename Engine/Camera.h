@@ -20,7 +20,7 @@ public:
 	void Draw(Drawable& drawable) {
 		drawable.AddTranslation(center);
 
-		drawable.SetZoom(zoom);
+		drawable.MultiplySeperateZoom(zoom,zoom);
 		css.Draw(drawable);
 	}
 

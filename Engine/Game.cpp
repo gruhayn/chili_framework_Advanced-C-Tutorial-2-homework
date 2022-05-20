@@ -32,15 +32,15 @@ Game::Game(MainWindow& wnd)
 	css(gfx),
 	cam(css)
 {
-	ConvexRegularPolygon go1 = ConvexRegularPolygon{ Vec2<int>{0,0},3, 100, Colors::Blue, 3.14159f / 4 };
-	ConvexRegularPolygon go2 = ConvexRegularPolygon{ Vec2<int>{200,100},6, 100, Colors::Yellow, 3.14159f / 4 };
+	ConvexRegularPolygon go1 = ConvexRegularPolygon{ Vec2<int>{10,20},6, 10, {Colors::Cyan, Colors::Green, Colors::Green, Colors::Green, Colors::Green,Colors::Green,Colors::Green,Colors::Green }};
+	//ConvexRegularPolygon go2 = ConvexRegularPolygon{ Vec2<int>{200,100},6, 100, {Colors::Blue, Colors::Yellow, Colors::Red}, 3.14159f / 6 };
+	Star s = Star{ Vec2<int>{100,100},10, 10, 100, {Colors::Red, Colors::Yellow, Colors::Blue} };
+	s.SetAnimation(std::make_shared<ZoomAnimation>(zoomAnimation));
 
-	Star s = Star{ Vec2<int>{0,100},5, 10, 100, Colors::Blue, 3.14159f/4 };
-
-	objects.push_back(go1);
-	objects.push_back(go2);
 	objects.push_back(s);
-
+	//objects.push_back(go2);
+	//objects.push_back(s);
+	ft.Mark();
 }
 
 void Game::Go()
@@ -80,7 +80,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	float elapsedTime = ft.Mark();
 	for (auto& o : objects) {
-		cam.Draw(o.GetDrawable());
+		cam.Draw(o.GetDrawable(elapsedTime));
 	}
 }

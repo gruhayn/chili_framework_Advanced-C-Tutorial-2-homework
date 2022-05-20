@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "CoordinateSystemSwitcher.h"
+#include "Animation.h"
+#include "memory"
 
 class GeometricObject
 { 
@@ -11,10 +13,11 @@ class GeometricObject
 public:
 	GeometricObject() = default;
 
-	GeometricObject(std::vector<Edge> edges)
+	GeometricObject(std::vector<Edge> edges, std::shared_ptr<Animation> anim=nullptr)
 		:
 		edges(edges),
-		center(Vec2<int>{0, 0})
+		center(Vec2<int>{0, 0}),
+		anim(anim)
 	{};
 
 	std::vector<Edge> GetEdges() {
@@ -26,10 +29,19 @@ public:
 		return center;
 	}
 
-	Drawable GetDrawable() {
-		return Drawable(edges, center);
+	Drawable GetDrawable(float elapsedTime) {
+		Drawable drawable = Drawable(edges, center);
+		if (anim != nullptr) {
+			drawable = anim->Do(std::move(drawable), elapsedTime);
+		}
+		return drawable;
 	}
 
+	void SetAnimation(std::shared_ptr<Animation> anim) {
+		this->anim = anim;
+	}
+
+	virtual ~GeometricObject() = default;
 protected:
 	
 	void SetEdges(std::vector<Edge> in_edges) {
@@ -38,9 +50,9 @@ protected:
 
 
 protected:
-	Vec2<int> center;
-	Color c;
+	Vec2<int> center = Vec2<int>{0, 0};
 
 private:
-	std::vector<Edge> edges;
+	std::vector<Edge> edges= {};
+	std::shared_ptr<Animation> anim = nullptr; //todo shared ptr kullanimina bak 
 };

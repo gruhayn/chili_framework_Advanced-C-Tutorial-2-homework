@@ -27,6 +27,8 @@
 #include "ConvexRegularPolygon.h"
 #include "Drawable.h"
 #include "Camera.h"
+#include "FrameTimer.h"
+#include "ZoomAnimation.h"
 
 class Game
 {
@@ -49,5 +51,8 @@ private:
 	std::vector<GeometricObject> objects;
 	Camera cam;
 	CoordinateSystemSwitcher css;
+	FrameTimer ft = FrameTimer();
+	ZoomAnimation zoomAnimation = ZoomAnimation{ 5,1,4.0,1,4};
+
 	/********************************/
 };
