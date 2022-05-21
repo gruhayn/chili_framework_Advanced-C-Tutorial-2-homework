@@ -29,6 +29,7 @@
 #include "Camera.h"
 #include "FrameTimer.h"
 #include "ZoomAnimation.h"
+#include "ColorWheelAnimation.h"
 
 class Game
 {
@@ -52,7 +53,7 @@ private:
 	Camera cam;
 	CoordinateSystemSwitcher css;
 	FrameTimer ft = FrameTimer();
-	ZoomAnimation zoomAnimation = ZoomAnimation{ 5,1,4.0,1,4};
-
+	ZoomAnimation zoomAnimation = ZoomAnimation{ 0.5,1,4.0,1,4};
+	ColorWheelAnimation colorWheelAnim = ColorWheelAnimation{0.01,2};
 	/********************************/
 };

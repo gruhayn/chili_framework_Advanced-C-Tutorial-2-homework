@@ -48,7 +48,6 @@ protected:
 		edges = in_edges;
 	}
 
-
 protected:
 	Vec2<int> center = Vec2<int>{0, 0};
 

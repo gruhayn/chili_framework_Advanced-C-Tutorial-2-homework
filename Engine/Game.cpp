@@ -32,12 +32,12 @@ Game::Game(MainWindow& wnd)
 	css(gfx),
 	cam(css)
 {
-	ConvexRegularPolygon go1 = ConvexRegularPolygon{ Vec2<int>{10,20},6, 10, {Colors::Cyan, Colors::Green, Colors::Green, Colors::Green, Colors::Green,Colors::Green,Colors::Green,Colors::Green }};
+	ConvexRegularPolygon go1 = ConvexRegularPolygon{ Vec2<int>{10,20},6, 100, {Colors::Cyan, Colors::Green, Colors::Green, Colors::Green, Colors::Green,Colors::Green,Colors::Green,Colors::Green }};
 	//ConvexRegularPolygon go2 = ConvexRegularPolygon{ Vec2<int>{200,100},6, 100, {Colors::Blue, Colors::Yellow, Colors::Red}, 3.14159f / 6 };
-	Star s = Star{ Vec2<int>{100,100},10, 10, 100, {Colors::Red, Colors::Yellow, Colors::Blue} };
-	s.SetAnimation(std::make_shared<ZoomAnimation>(zoomAnimation));
-
-	objects.push_back(s);
+	Star s = Star{ Vec2<int>{100,100},10, 50, 100, {Colors::Red, Colors::Red, Colors::Red, Colors::Red, Colors::Red, Colors::Red, Colors::Red, Colors::Magenta} };
+	//s.SetAnimation(std::make_shared<ZoomAnimation>(zoomAnimation));
+	go1.SetAnimation(std::make_shared<ColorWheelAnimation>(colorWheelAnim));
+	objects.push_back(go1);
 	//objects.push_back(go2);
 	//objects.push_back(s);
 	ft.Mark();
@@ -54,16 +54,16 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	int speed = 20;
-	if (wnd.kbd.KeyIsPressed(VK_UP)) {
+	if (wnd.kbd.KeyIsPressed(VK_UP) || wnd.kbd.KeyIsPressed('W')) {
 		cam.MoveUp(speed);
 	}
-	else if (wnd.kbd.KeyIsPressed(VK_DOWN)) {
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN) || wnd.kbd.KeyIsPressed('S')) {
 		cam.MoveUp(-speed);
 	}
-	else if (wnd.kbd.KeyIsPressed(VK_LEFT)) {
+	else if (wnd.kbd.KeyIsPressed(VK_LEFT) || wnd.kbd.KeyIsPressed('A')) {
 		cam.MoveRight(-speed);
 	}
-	else if (wnd.kbd.KeyIsPressed(VK_RIGHT)) {
+	else if (wnd.kbd.KeyIsPressed(VK_RIGHT) || wnd.kbd.KeyIsPressed('D')) {
 		cam.MoveRight(speed);
 	}
 

@@ -15,7 +15,12 @@ public:
 		zoom_x(zoom_x),
 		zoom_y(zoom_y)
 	{
-
+		std::for_each(edges.cbegin(), edges.cend(),
+			[&](Edge e)
+			{
+				colors.push_back(e.color);
+			}
+		);
 	}
 
 	void SetZoom(float in_zoom) {
@@ -70,10 +75,32 @@ public:
 		
 	}
 
+
+	std::vector<Edge> GetEdges() {
+		return edges;
+	}
+
+	void SetEdges(std::vector<Edge> in_edges) {
+		edges = in_edges;
+	}
+
+	void TurnColorWheel(int stepCount) {
+		if (stepCount > 0) {
+			int size = edges.size();
+			for (int i = 0; i < size; ++i) {
+				edges[i].color = colors[(i + stepCount) % size];
+			}
+		}
+	}
+
+	int GetEdgeCount() {
+		return edges.size();
+	}
 private:
 	float zoom_x;
 	float zoom_y;
 	Vec2<int> translation;
 	std::vector<Edge> edges;
+	std::vector<Color> colors;
 
 };

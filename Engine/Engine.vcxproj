@@ -142,6 +142,7 @@
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
+    <ClInclude Include="ColorWheelAnimation.h" />
     <ClInclude Include="COMInitializer.h" />
     <ClInclude Include="ConvexRegularPolygon.h" />
     <ClInclude Include="CoordinateSystemSwitcher.h" />

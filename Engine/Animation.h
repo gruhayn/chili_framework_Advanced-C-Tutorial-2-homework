@@ -10,7 +10,9 @@ public:
 	Drawable Do(Drawable drawable, float elapsedTime) {
 
 		this->elapsedTime += elapsedTime * animationSpeedMultiplier;
-
+		if (this->elapsedTime < 0) {
+			this->elapsedTime = 0;
+		}
 		while (this->elapsedTime>duration) {
 			this->elapsedTime -= duration;
 		}

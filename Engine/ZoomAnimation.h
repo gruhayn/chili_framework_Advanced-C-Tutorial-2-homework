@@ -26,6 +26,7 @@ public:
 			this->zoom_y_end = zoom_y_start;
 		}
 
+
 		this->duration = duration;
 		this->animationSpeedMultiplier = animationSpeedMultiplier;
 	}
